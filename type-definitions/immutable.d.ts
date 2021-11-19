@@ -66,7 +66,7 @@
  * `getIn` which expects an `Iterable` path:
  *
  * ```
- * getIn(path: Iterable<string | number>): unknown
+ * getIn(path: Iterable<string | number>): any
  * ```
  *
  * To use this method, we could pass an array: `data.getIn([ "key", 2 ])`.
@@ -116,7 +116,7 @@ declare namespace Immutable {
      * List.isList(List()); // true
      * ```
      */
-    function isList(maybeList: unknown): maybeList is List<unknown>;
+    function isList(maybeList: any): maybeList is List<any>;
 
     /**
      * Creates a new List containing `values`.
@@ -436,7 +436,7 @@ declare namespace Immutable {
      *
      * Note: `setIn` can be used in `withMutations`.
      */
-    setIn(keyPath: Iterable<unknown>, value: unknown): this;
+    setIn(keyPath: Iterable<any>, value: any): this;
 
     /**
      * Returns a new List having removed the value at this `keyPath`. If any
@@ -466,8 +466,8 @@ declare namespace Immutable {
      *
      * @alias removeIn
      */
-    deleteIn(keyPath: Iterable<unknown>): this;
-    removeIn(keyPath: Iterable<unknown>): this;
+    deleteIn(keyPath: Iterable<any>): this;
+    removeIn(keyPath: Iterable<any>): this;
 
     /**
      * Note: `updateIn` can be used in `withMutations`.
@@ -475,13 +475,13 @@ declare namespace Immutable {
      * @see `Map#updateIn`
      */
     updateIn(
-      keyPath: Iterable<unknown>,
-      notSetValue: unknown,
-      updater: (value: unknown) => unknown
+      keyPath: Iterable<any>,
+      notSetValue: any,
+      updater: (value: any) => any
     ): this;
     updateIn(
-      keyPath: Iterable<unknown>,
-      updater: (value: unknown) => unknown
+      keyPath: Iterable<any>,
+      updater: (value: any) => any
     ): this;
 
     /**
@@ -489,7 +489,7 @@ declare namespace Immutable {
      *
      * @see `Map#mergeIn`
      */
-    mergeIn(keyPath: Iterable<unknown>, ...collections: Array<unknown>): this;
+    mergeIn(keyPath: Iterable<any>, ...collections: Array<any>): this;
 
     /**
      * Note: `mergeDeepIn` can be used in `withMutations`.
@@ -497,8 +497,8 @@ declare namespace Immutable {
      * @see `Map#mergeDeepIn`
      */
     mergeDeepIn(
-      keyPath: Iterable<unknown>,
-      ...collections: Array<unknown>
+      keyPath: Iterable<any>,
+      ...collections: Array<any>
     ): this;
 
     // Transient changes
@@ -510,7 +510,7 @@ declare namespace Immutable {
      *
      * @see `Map#withMutations`
      */
-    withMutations(mutator: (mutable: this) => unknown): this;
+    withMutations(mutator: (mutable: this) => any): this;
 
     /**
      * An alternative API for withMutations()
@@ -559,7 +559,7 @@ declare namespace Immutable {
      */
     map<M>(
       mapper: (value: T, key: number, iter: this) => M,
-      context?: unknown
+      context?: any
     ): List<M>;
 
     /**
@@ -569,7 +569,7 @@ declare namespace Immutable {
      */
     flatMap<M>(
       mapper: (value: T, key: number, iter: this) => Iterable<M>,
-      context?: unknown
+      context?: any
     ): List<M>;
 
     /**
@@ -581,11 +581,11 @@ declare namespace Immutable {
      */
     filter<F extends T>(
       predicate: (value: T, index: number, iter: this) => value is F,
-      context?: unknown
+      context?: any
     ): List<F>;
     filter(
-      predicate: (value: T, index: number, iter: this) => unknown,
-      context?: unknown
+      predicate: (value: T, index: number, iter: this) => any,
+      context?: any
     ): this;
 
     /**
@@ -602,12 +602,12 @@ declare namespace Immutable {
      * const c = a.zip(b); // List [ [ 1, 4 ], [ 2, 5 ], [ 3, 6 ] ]
      * ```
      */
-    zip<U>(other: Collection<unknown, U>): List<[T, U]>;
+    zip<U>(other: Collection<any, U>): List<[T, U]>;
     zip<U, V>(
-      other: Collection<unknown, U>,
-      other2: Collection<unknown, V>
+      other: Collection<any, U>,
+      other2: Collection<any, V>
     ): List<[T, U, V]>;
-    zip(...collections: Array<Collection<unknown, unknown>>): List<unknown>;
+    zip(...collections: Array<Collection<any, any>>): List<any>;
 
     /**
      * Returns a List "zipped" with the provided collections.
@@ -628,12 +628,12 @@ declare namespace Immutable {
      * input, some results may contain undefined values. TypeScript cannot
      * account for these without cases (as of v2.5).
      */
-    zipAll<U>(other: Collection<unknown, U>): List<[T, U]>;
+    zipAll<U>(other: Collection<any, U>): List<[T, U]>;
     zipAll<U, V>(
-      other: Collection<unknown, U>,
-      other2: Collection<unknown, V>
+      other: Collection<any, U>,
+      other2: Collection<any, V>
     ): List<[T, U, V]>;
-    zipAll(...collections: Array<Collection<unknown, unknown>>): List<unknown>;
+    zipAll(...collections: Array<Collection<any, any>>): List<any>;
 
     /**
      * Returns a List "zipped" with the provided collections by using a
@@ -651,16 +651,16 @@ declare namespace Immutable {
      */
     zipWith<U, Z>(
       zipper: (value: T, otherValue: U) => Z,
-      otherCollection: Collection<unknown, U>
+      otherCollection: Collection<any, U>
     ): List<Z>;
     zipWith<U, V, Z>(
       zipper: (value: T, otherValue: U, thirdValue: V) => Z,
-      otherCollection: Collection<unknown, U>,
-      thirdCollection: Collection<unknown, V>
+      otherCollection: Collection<any, U>,
+      thirdCollection: Collection<any, V>
     ): List<Z>;
     zipWith<Z>(
-      zipper: (...values: Array<unknown>) => Z,
-      ...collections: Array<Collection<unknown, unknown>>
+      zipper: (...values: Array<any>) => Z,
+      ...collections: Array<Collection<any, any>>
     ): List<Z>;
   }
 
@@ -702,7 +702,7 @@ declare namespace Immutable {
      * Map.isMap(Map()) // true
      * ```
      */
-    function isMap(maybeMap: unknown): maybeMap is Map<unknown, unknown>;
+    function isMap(maybeMap: any): maybeMap is Map<any, any>;
 
     /**
      * Creates a new Map from alternating keys and values
@@ -720,7 +720,7 @@ declare namespace Immutable {
      *
      * @deprecated Use Map([ [ 'k', 'v' ] ]) or Map({ k: 'v' })
      */
-    function of(...keyValues: Array<unknown>): Map<unknown, unknown>;
+    function of(...keyValues: Array<any>): Map<any, any>;
   }
 
   /**
@@ -1070,7 +1070,7 @@ declare namespace Immutable {
      * Note: `mergeDeepWith` can be used in `withMutations`.
      */
     mergeDeepWith(
-      merger: (oldVal: unknown, newVal: unknown, key: unknown) => unknown,
+      merger: (oldVal: any, newVal: any, key: any) => any,
       ...collections: Array<Iterable<[K, V]> | { [key: string]: V }>
     ): this;
 
@@ -1142,7 +1142,7 @@ declare namespace Immutable {
      *
      * Note: `setIn` can be used in `withMutations`.
      */
-    setIn(keyPath: Iterable<unknown>, value: unknown): this;
+    setIn(keyPath: Iterable<any>, value: any): this;
 
     /**
      * Returns a new Map having removed the value at this `keyPath`. If any keys
@@ -1152,8 +1152,8 @@ declare namespace Immutable {
      *
      * @alias removeIn
      */
-    deleteIn(keyPath: Iterable<unknown>): this;
-    removeIn(keyPath: Iterable<unknown>): this;
+    deleteIn(keyPath: Iterable<any>): this;
+    removeIn(keyPath: Iterable<any>): this;
 
     /**
      * Returns a new Map having applied the `updater` to the entry found at the
@@ -1232,13 +1232,13 @@ declare namespace Immutable {
      * Note: `updateIn` can be used in `withMutations`.
      */
     updateIn(
-      keyPath: Iterable<unknown>,
-      notSetValue: unknown,
-      updater: (value: unknown) => unknown
+      keyPath: Iterable<any>,
+      notSetValue: any,
+      updater: (value: any) => any
     ): this;
     updateIn(
-      keyPath: Iterable<unknown>,
-      updater: (value: unknown) => unknown
+      keyPath: Iterable<any>,
+      updater: (value: any) => any
     ): this;
 
     /**
@@ -1253,7 +1253,7 @@ declare namespace Immutable {
      *
      * Note: `mergeIn` can be used in `withMutations`.
      */
-    mergeIn(keyPath: Iterable<unknown>, ...collections: Array<unknown>): this;
+    mergeIn(keyPath: Iterable<any>, ...collections: Array<any>): this;
 
     /**
      * A combination of `updateIn` and `mergeDeep`, returning a new Map, but
@@ -1268,8 +1268,8 @@ declare namespace Immutable {
      * Note: `mergeDeepIn` can be used in `withMutations`.
      */
     mergeDeepIn(
-      keyPath: Iterable<unknown>,
-      ...collections: Array<unknown>
+      keyPath: Iterable<any>,
+      ...collections: Array<any>
     ): this;
 
     // Transient changes
@@ -1302,7 +1302,7 @@ declare namespace Immutable {
      * `withMutations`! Read the documentation for each method to see if it
      * is safe to use in `withMutations`.
      */
-    withMutations(mutator: (mutable: this) => unknown): this;
+    withMutations(mutator: (mutable: this) => any): this;
 
     /**
      * Another way to avoid creation of intermediate Immutable maps is to create
@@ -1357,7 +1357,7 @@ declare namespace Immutable {
      */
     map<M>(
       mapper: (value: V, key: K, iter: this) => M,
-      context?: unknown
+      context?: any
     ): Map<K, M>;
 
     /**
@@ -1365,7 +1365,7 @@ declare namespace Immutable {
      */
     mapKeys<M>(
       mapper: (key: K, value: V, iter: this) => M,
-      context?: unknown
+      context?: any
     ): Map<M, V>;
 
     /**
@@ -1377,7 +1377,7 @@ declare namespace Immutable {
         index: number,
         iter: this
       ) => [KM, VM] | undefined,
-      context?: unknown
+      context?: any
     ): Map<KM, VM>;
 
     /**
@@ -1387,7 +1387,7 @@ declare namespace Immutable {
      */
     flatMap<KM, VM>(
       mapper: (value: V, key: K, iter: this) => Iterable<[KM, VM]>,
-      context?: unknown
+      context?: any
     ): Map<KM, VM>;
 
     /**
@@ -1399,11 +1399,11 @@ declare namespace Immutable {
      */
     filter<F extends V>(
       predicate: (value: V, key: K, iter: this) => value is F,
-      context?: unknown
+      context?: any
     ): Map<K, F>;
     filter(
-      predicate: (value: V, key: K, iter: this) => unknown,
-      context?: unknown
+      predicate: (value: V, key: K, iter: this) => any,
+      context?: any
     ): this;
 
     /**
@@ -1428,8 +1428,8 @@ declare namespace Immutable {
      * True if the provided value is an OrderedMap.
      */
     function isOrderedMap(
-      maybeOrderedMap: unknown
-    ): maybeOrderedMap is OrderedMap<unknown, unknown>;
+      maybeOrderedMap: any
+    ): maybeOrderedMap is OrderedMap<any, any>;
   }
 
   /**
@@ -1525,7 +1525,7 @@ declare namespace Immutable {
      */
     map<M>(
       mapper: (value: V, key: K, iter: this) => M,
-      context?: unknown
+      context?: any
     ): OrderedMap<K, M>;
 
     /**
@@ -1533,7 +1533,7 @@ declare namespace Immutable {
      */
     mapKeys<M>(
       mapper: (key: K, value: V, iter: this) => M,
-      context?: unknown
+      context?: any
     ): OrderedMap<M, V>;
 
     /**
@@ -1545,7 +1545,7 @@ declare namespace Immutable {
         index: number,
         iter: this
       ) => [KM, VM] | undefined,
-      context?: unknown
+      context?: any
     ): OrderedMap<KM, VM>;
 
     /**
@@ -1555,7 +1555,7 @@ declare namespace Immutable {
      */
     flatMap<KM, VM>(
       mapper: (value: V, key: K, iter: this) => Iterable<[KM, VM]>,
-      context?: unknown
+      context?: any
     ): OrderedMap<KM, VM>;
 
     /**
@@ -1567,11 +1567,11 @@ declare namespace Immutable {
      */
     filter<F extends V>(
       predicate: (value: V, key: K, iter: this) => value is F,
-      context?: unknown
+      context?: any
     ): OrderedMap<K, F>;
     filter(
-      predicate: (value: V, key: K, iter: this) => unknown,
-      context?: unknown
+      predicate: (value: V, key: K, iter: this) => any,
+      context?: any
     ): this;
 
     /**
@@ -1595,7 +1595,7 @@ declare namespace Immutable {
     /**
      * True if the provided value is a Set
      */
-    function isSet(maybeSet: unknown): maybeSet is Set<unknown>;
+    function isSet(maybeSet: any): maybeSet is Set<any>;
 
     /**
      * Creates a new Set containing `values`.
@@ -1606,8 +1606,8 @@ declare namespace Immutable {
      * `Set.fromKeys()` creates a new immutable Set containing the keys from
      * this Collection or JavaScript Object.
      */
-    function fromKeys<T>(iter: Collection<T, unknown>): Set<T>;
-    function fromKeys(obj: { [key: string]: unknown }): Set<string>;
+    function fromKeys<T>(iter: Collection<T, any>): Set<T>;
+    function fromKeys(obj: { [key: string]: any }): Set<string>;
 
     /**
      * `Set.intersect()` creates a new immutable Set that is the intersection of
@@ -1727,7 +1727,7 @@ declare namespace Immutable {
      *
      * @see `Map#withMutations`
      */
-    withMutations(mutator: (mutable: this) => unknown): this;
+    withMutations(mutator: (mutable: this) => any): this;
 
     /**
      * Note: Not all methods can be used on a mutable collection or within
@@ -1759,7 +1759,7 @@ declare namespace Immutable {
      */
     map<M>(
       mapper: (value: T, key: T, iter: this) => M,
-      context?: unknown
+      context?: any
     ): Set<M>;
 
     /**
@@ -1769,7 +1769,7 @@ declare namespace Immutable {
      */
     flatMap<M>(
       mapper: (value: T, key: T, iter: this) => Iterable<M>,
-      context?: unknown
+      context?: any
     ): Set<M>;
 
     /**
@@ -1781,11 +1781,11 @@ declare namespace Immutable {
      */
     filter<F extends T>(
       predicate: (value: T, key: T, iter: this) => value is F,
-      context?: unknown
+      context?: any
     ): Set<F>;
     filter(
-      predicate: (value: T, key: T, iter: this) => unknown,
-      context?: unknown
+      predicate: (value: T, key: T, iter: this) => any,
+      context?: any
     ): this;
   }
 
@@ -1803,7 +1803,7 @@ declare namespace Immutable {
     /**
      * True if the provided value is an OrderedSet.
      */
-    function isOrderedSet(maybeOrderedSet: unknown): boolean;
+    function isOrderedSet(maybeOrderedSet: any): boolean;
 
     /**
      * Creates a new OrderedSet containing `values`.
@@ -1814,8 +1814,8 @@ declare namespace Immutable {
      * `OrderedSet.fromKeys()` creates a new immutable OrderedSet containing
      * the keys from this Collection or JavaScript Object.
      */
-    function fromKeys<T>(iter: Collection<T, unknown>): OrderedSet<T>;
-    function fromKeys(obj: { [key: string]: unknown }): OrderedSet<string>;
+    function fromKeys<T>(iter: Collection<T, any>): OrderedSet<T>;
+    function fromKeys(obj: { [key: string]: any }): OrderedSet<string>;
   }
 
   /**
@@ -1858,7 +1858,7 @@ declare namespace Immutable {
      */
     map<M>(
       mapper: (value: T, key: T, iter: this) => M,
-      context?: unknown
+      context?: any
     ): OrderedSet<M>;
 
     /**
@@ -1868,7 +1868,7 @@ declare namespace Immutable {
      */
     flatMap<M>(
       mapper: (value: T, key: T, iter: this) => Iterable<M>,
-      context?: unknown
+      context?: any
     ): OrderedSet<M>;
 
     /**
@@ -1880,11 +1880,11 @@ declare namespace Immutable {
      */
     filter<F extends T>(
       predicate: (value: T, key: T, iter: this) => value is F,
-      context?: unknown
+      context?: any
     ): OrderedSet<F>;
     filter(
-      predicate: (value: T, key: T, iter: this) => unknown,
-      context?: unknown
+      predicate: (value: T, key: T, iter: this) => any,
+      context?: any
     ): this;
 
     /**
@@ -1900,14 +1900,14 @@ declare namespace Immutable {
      * // OrderedSet [ [ 1, 4 ], [ 2, 5 ], [ 3, 6 ] ]
      * ```
      */
-    zip<U>(other: Collection<unknown, U>): OrderedSet<[T, U]>;
+    zip<U>(other: Collection<any, U>): OrderedSet<[T, U]>;
     zip<U, V>(
-      other1: Collection<unknown, U>,
-      other2: Collection<unknown, V>
+      other1: Collection<any, U>,
+      other2: Collection<any, V>
     ): OrderedSet<[T, U, V]>;
     zip(
-      ...collections: Array<Collection<unknown, unknown>>
-    ): OrderedSet<unknown>;
+      ...collections: Array<Collection<any, any>>
+    ): OrderedSet<any>;
 
     /**
      * Returns a OrderedSet of the same type "zipped" with the provided
@@ -1926,14 +1926,14 @@ declare namespace Immutable {
      * input, some results may contain undefined values. TypeScript cannot
      * account for these without cases (as of v2.5).
      */
-    zipAll<U>(other: Collection<unknown, U>): OrderedSet<[T, U]>;
+    zipAll<U>(other: Collection<any, U>): OrderedSet<[T, U]>;
     zipAll<U, V>(
-      other1: Collection<unknown, U>,
-      other2: Collection<unknown, V>
+      other1: Collection<any, U>,
+      other2: Collection<any, V>
     ): OrderedSet<[T, U, V]>;
     zipAll(
-      ...collections: Array<Collection<unknown, unknown>>
-    ): OrderedSet<unknown>;
+      ...collections: Array<Collection<any, any>>
+    ): OrderedSet<any>;
 
     /**
      * Returns an OrderedSet of the same type "zipped" with the provided
@@ -1943,16 +1943,16 @@ declare namespace Immutable {
      */
     zipWith<U, Z>(
       zipper: (value: T, otherValue: U) => Z,
-      otherCollection: Collection<unknown, U>
+      otherCollection: Collection<any, U>
     ): OrderedSet<Z>;
     zipWith<U, V, Z>(
       zipper: (value: T, otherValue: U, thirdValue: V) => Z,
-      otherCollection: Collection<unknown, U>,
-      thirdCollection: Collection<unknown, V>
+      otherCollection: Collection<any, U>,
+      thirdCollection: Collection<any, V>
     ): OrderedSet<Z>;
     zipWith<Z>(
-      zipper: (...values: Array<unknown>) => Z,
-      ...collections: Array<Collection<unknown, unknown>>
+      zipper: (...values: Array<any>) => Z,
+      ...collections: Array<Collection<any, any>>
     ): OrderedSet<Z>;
   }
 
@@ -1973,7 +1973,7 @@ declare namespace Immutable {
     /**
      * True if the provided value is a Stack
      */
-    function isStack(maybeStack: unknown): maybeStack is Stack<unknown>;
+    function isStack(maybeStack: any): maybeStack is Stack<any>;
 
     /**
      * Creates a new Stack containing `values`.
@@ -2068,7 +2068,7 @@ declare namespace Immutable {
      *
      * @see `Map#withMutations`
      */
-    withMutations(mutator: (mutable: this) => unknown): this;
+    withMutations(mutator: (mutable: this) => any): this;
 
     /**
      * Note: Not all methods can be used on a mutable collection or within
@@ -2108,7 +2108,7 @@ declare namespace Immutable {
      */
     map<M>(
       mapper: (value: T, key: number, iter: this) => M,
-      context?: unknown
+      context?: any
     ): Stack<M>;
 
     /**
@@ -2118,7 +2118,7 @@ declare namespace Immutable {
      */
     flatMap<M>(
       mapper: (value: T, key: number, iter: this) => Iterable<M>,
-      context?: unknown
+      context?: any
     ): Stack<M>;
 
     /**
@@ -2130,11 +2130,11 @@ declare namespace Immutable {
      */
     filter<F extends T>(
       predicate: (value: T, index: number, iter: this) => value is F,
-      context?: unknown
+      context?: any
     ): Set<F>;
     filter(
-      predicate: (value: T, index: number, iter: this) => unknown,
-      context?: unknown
+      predicate: (value: T, index: number, iter: this) => any,
+      context?: any
     ): this;
 
     /**
@@ -2148,12 +2148,12 @@ declare namespace Immutable {
      * const c = a.zip(b); // Stack [ [ 1, 4 ], [ 2, 5 ], [ 3, 6 ] ]
      * ```
      */
-    zip<U>(other: Collection<unknown, U>): Stack<[T, U]>;
+    zip<U>(other: Collection<any, U>): Stack<[T, U]>;
     zip<U, V>(
-      other: Collection<unknown, U>,
-      other2: Collection<unknown, V>
+      other: Collection<any, U>,
+      other2: Collection<any, V>
     ): Stack<[T, U, V]>;
-    zip(...collections: Array<Collection<unknown, unknown>>): Stack<unknown>;
+    zip(...collections: Array<Collection<any, any>>): Stack<any>;
 
     /**
      * Returns a Stack "zipped" with the provided collections.
@@ -2171,12 +2171,12 @@ declare namespace Immutable {
      * input, some results may contain undefined values. TypeScript cannot
      * account for these without cases (as of v2.5).
      */
-    zipAll<U>(other: Collection<unknown, U>): Stack<[T, U]>;
+    zipAll<U>(other: Collection<any, U>): Stack<[T, U]>;
     zipAll<U, V>(
-      other: Collection<unknown, U>,
-      other2: Collection<unknown, V>
+      other: Collection<any, U>,
+      other2: Collection<any, V>
     ): Stack<[T, U, V]>;
-    zipAll(...collections: Array<Collection<unknown, unknown>>): Stack<unknown>;
+    zipAll(...collections: Array<Collection<any, any>>): Stack<any>;
 
     /**
      * Returns a Stack "zipped" with the provided collections by using a
@@ -2191,16 +2191,16 @@ declare namespace Immutable {
      */
     zipWith<U, Z>(
       zipper: (value: T, otherValue: U) => Z,
-      otherCollection: Collection<unknown, U>
+      otherCollection: Collection<any, U>
     ): Stack<Z>;
     zipWith<U, V, Z>(
       zipper: (value: T, otherValue: U, thirdValue: V) => Z,
-      otherCollection: Collection<unknown, U>,
-      thirdCollection: Collection<unknown, V>
+      otherCollection: Collection<any, U>,
+      thirdCollection: Collection<any, V>
     ): Stack<Z>;
     zipWith<Z>(
-      zipper: (...values: Array<unknown>) => Z,
-      ...collections: Array<Collection<unknown, unknown>>
+      zipper: (...values: Array<any>) => Z,
+      ...collections: Array<Collection<any, any>>
     ): Stack<Z>;
   }
 
@@ -2406,7 +2406,7 @@ declare namespace Immutable {
     /**
      * True if `maybeRecord` is an instance of a Record.
      */
-    function isRecord(maybeRecord: unknown): maybeRecord is Record<{}>;
+    function isRecord(maybeRecord: any): maybeRecord is Record<{}>;
 
     /**
      * Records allow passing a second parameter to supply a descriptive name
@@ -2437,7 +2437,7 @@ declare namespace Immutable {
      * -->
      * ```js
      * // makePerson is a Record Factory function
-     * const makePerson = Record({ name: null, favoriteColor: 'unknown' });
+     * const makePerson = Record({ name: null, favoriteColor: 'any' });
      *
      * // alan is a Record instance
      * const alan = makePerson({ name: 'Alan' });
@@ -2448,7 +2448,7 @@ declare namespace Immutable {
      * access on the resulting instances:
      *
      * <!-- runkit:activate
-     *      { "preamble": "const { Record } = require('immutable');const makePerson = Record({ name: null, favoriteColor: 'unknown' });const alan = makePerson({ name: 'Alan' });" }
+     *      { "preamble": "const { Record } = require('immutable');const makePerson = Record({ name: null, favoriteColor: 'any' });const alan = makePerson({ name: 'Alan' });" }
      * -->
      * ```js
      * // Use the Record API
@@ -2468,7 +2468,7 @@ declare namespace Immutable {
      *
      * // Use RecordFactory<TProps> for defining new Record factory functions.
      * type PersonProps = { name: ?string, favoriteColor: string };
-     * const makePerson: RecordFactory<PersonProps> = Record({ name: null, favoriteColor: 'unknown' });
+     * const makePerson: RecordFactory<PersonProps> = Record({ name: null, favoriteColor: 'any' });
      *
      * // Use RecordOf<T> for defining new instances of that Record.
      * type Person = RecordOf<PersonProps>;
@@ -2478,10 +2478,10 @@ declare namespace Immutable {
     namespace Factory {}
 
     interface Factory<TProps extends object> {
-      (values?: Partial<TProps> | Iterable<[string, unknown]>): Record<TProps> &
+      (values?: Partial<TProps> | Iterable<[string, any]>): Record<TProps> &
         Readonly<TProps>;
       new (
-        values?: Partial<TProps> | Iterable<[string, unknown]>
+        values?: Partial<TProps> | Iterable<[string, any]>
       ): Record<TProps> & Readonly<TProps>;
 
       /**
@@ -2492,7 +2492,7 @@ declare namespace Immutable {
     }
 
     function Factory<TProps extends object>(
-      values?: Partial<TProps> | Iterable<[string, unknown]>
+      values?: Partial<TProps> | Iterable<[string, any]>
     ): Record<TProps> & Readonly<TProps>;
   }
 
@@ -2523,17 +2523,17 @@ declare namespace Immutable {
      * notSetValue will be returned if provided. Note that this scenario would
      * produce an error when using Flow or TypeScript.
      */
-    get<K extends keyof TProps>(key: K, notSetValue?: unknown): TProps[K];
+    get<K extends keyof TProps>(key: K, notSetValue?: any): TProps[K];
     get<T>(key: string, notSetValue: T): T;
 
     // Reading deep values
 
-    hasIn(keyPath: Iterable<unknown>): boolean;
-    getIn(keyPath: Iterable<unknown>): unknown;
+    hasIn(keyPath: Iterable<any>): boolean;
+    getIn(keyPath: Iterable<any>): any;
 
     // Value equality
 
-    equals(other: unknown): boolean;
+    equals(other: any): boolean;
     hashCode(): number;
 
     // Persistent changes
@@ -2544,19 +2544,19 @@ declare namespace Immutable {
       updater: (value: TProps[K]) => TProps[K]
     ): this;
     merge(
-      ...collections: Array<Partial<TProps> | Iterable<[string, unknown]>>
+      ...collections: Array<Partial<TProps> | Iterable<[string, any]>>
     ): this;
     mergeDeep(
-      ...collections: Array<Partial<TProps> | Iterable<[string, unknown]>>
+      ...collections: Array<Partial<TProps> | Iterable<[string, any]>>
     ): this;
 
     mergeWith(
-      merger: (oldVal: unknown, newVal: unknown, key: keyof TProps) => unknown,
-      ...collections: Array<Partial<TProps> | Iterable<[string, unknown]>>
+      merger: (oldVal: any, newVal: any, key: keyof TProps) => any,
+      ...collections: Array<Partial<TProps> | Iterable<[string, any]>>
     ): this;
     mergeDeepWith(
-      merger: (oldVal: unknown, newVal: unknown, key: unknown) => unknown,
-      ...collections: Array<Partial<TProps> | Iterable<[string, unknown]>>
+      merger: (oldVal: any, newVal: any, key: any) => any,
+      ...collections: Array<Partial<TProps> | Iterable<[string, any]>>
     ): this;
 
     /**
@@ -2576,22 +2576,22 @@ declare namespace Immutable {
 
     // Deep persistent changes
 
-    setIn(keyPath: Iterable<unknown>, value: unknown): this;
+    setIn(keyPath: Iterable<any>, value: any): this;
     updateIn(
-      keyPath: Iterable<unknown>,
-      updater: (value: unknown) => unknown
+      keyPath: Iterable<any>,
+      updater: (value: any) => any
     ): this;
-    mergeIn(keyPath: Iterable<unknown>, ...collections: Array<unknown>): this;
+    mergeIn(keyPath: Iterable<any>, ...collections: Array<any>): this;
     mergeDeepIn(
-      keyPath: Iterable<unknown>,
-      ...collections: Array<unknown>
+      keyPath: Iterable<any>,
+      ...collections: Array<any>
     ): this;
 
     /**
      * @alias removeIn
      */
-    deleteIn(keyPath: Iterable<unknown>): this;
-    removeIn(keyPath: Iterable<unknown>): this;
+    deleteIn(keyPath: Iterable<any>): this;
+    removeIn(keyPath: Iterable<any>): this;
 
     // Conversion to JavaScript types
 
@@ -2601,7 +2601,7 @@ declare namespace Immutable {
      * Note: This method may not be overridden. Objects with custom
      * serialization to plain JS may override toJSON() instead.
      */
-    toJS(): { [K in keyof TProps]: unknown };
+    toJS(): { [K in keyof TProps]: any };
 
     /**
      * Shallowly converts this Record to equivalent native JavaScript Object.
@@ -2621,7 +2621,7 @@ declare namespace Immutable {
      *
      * @see `Map#withMutations`
      */
-    withMutations(mutator: (mutable: this) => unknown): this;
+    withMutations(mutator: (mutable: this) => any): this;
 
     /**
      * @see `Map#asMutable`
@@ -2734,11 +2734,11 @@ declare namespace Immutable {
      * structure such as Map, List, or Set.
      */
     function isSeq(
-      maybeSeq: unknown
+      maybeSeq: any
     ): maybeSeq is
-      | Seq.Indexed<unknown>
-      | Seq.Keyed<unknown, unknown>
-      | Seq.Set<unknown>;
+      | Seq.Indexed<any>
+      | Seq.Keyed<any, any>
+      | Seq.Set<any>;
 
     /**
      * `Seq` which represents key-value pairs.
@@ -2761,7 +2761,7 @@ declare namespace Immutable {
        *
        * Converts keys to Strings.
        */
-      toJS(): { [key: string]: unknown };
+      toJS(): { [key: string]: any };
 
       /**
        * Shallowly converts this Keyed Seq to equivalent native JavaScript Object.
@@ -2808,7 +2808,7 @@ declare namespace Immutable {
        */
       map<M>(
         mapper: (value: V, key: K, iter: this) => M,
-        context?: unknown
+        context?: any
       ): Seq.Keyed<K, M>;
 
       /**
@@ -2816,7 +2816,7 @@ declare namespace Immutable {
        */
       mapKeys<M>(
         mapper: (key: K, value: V, iter: this) => M,
-        context?: unknown
+        context?: any
       ): Seq.Keyed<M, V>;
 
       /**
@@ -2828,7 +2828,7 @@ declare namespace Immutable {
           index: number,
           iter: this
         ) => [KM, VM] | undefined,
-        context?: unknown
+        context?: any
       ): Seq.Keyed<KM, VM>;
 
       /**
@@ -2838,7 +2838,7 @@ declare namespace Immutable {
        */
       flatMap<KM, VM>(
         mapper: (value: V, key: K, iter: this) => Iterable<[KM, VM]>,
-        context?: unknown
+        context?: any
       ): Seq.Keyed<KM, VM>;
 
       /**
@@ -2850,11 +2850,11 @@ declare namespace Immutable {
        */
       filter<F extends V>(
         predicate: (value: V, key: K, iter: this) => value is F,
-        context?: unknown
+        context?: any
       ): Seq.Keyed<K, F>;
       filter(
-        predicate: (value: V, key: K, iter: this) => unknown,
-        context?: unknown
+        predicate: (value: V, key: K, iter: this) => any,
+        context?: any
       ): this;
 
       /**
@@ -2890,7 +2890,7 @@ declare namespace Immutable {
       /**
        * Deeply converts this Indexed Seq to equivalent native JavaScript Array.
        */
-      toJS(): Array<unknown>;
+      toJS(): Array<any>;
 
       /**
        * Shallowly converts this Indexed Seq to equivalent native JavaScript Array.
@@ -2929,7 +2929,7 @@ declare namespace Immutable {
        */
       map<M>(
         mapper: (value: T, key: number, iter: this) => M,
-        context?: unknown
+        context?: any
       ): Seq.Indexed<M>;
 
       /**
@@ -2939,7 +2939,7 @@ declare namespace Immutable {
        */
       flatMap<M>(
         mapper: (value: T, key: number, iter: this) => Iterable<M>,
-        context?: unknown
+        context?: any
       ): Seq.Indexed<M>;
 
       /**
@@ -2951,11 +2951,11 @@ declare namespace Immutable {
        */
       filter<F extends T>(
         predicate: (value: T, index: number, iter: this) => value is F,
-        context?: unknown
+        context?: any
       ): Seq.Indexed<F>;
       filter(
-        predicate: (value: T, index: number, iter: this) => unknown,
-        context?: unknown
+        predicate: (value: T, index: number, iter: this) => any,
+        context?: any
       ): this;
 
       /**
@@ -2969,14 +2969,14 @@ declare namespace Immutable {
        * const c = a.zip(b); // Seq [ [ 1, 4 ], [ 2, 5 ], [ 3, 6 ] ]
        * ```
        */
-      zip<U>(other: Collection<unknown, U>): Seq.Indexed<[T, U]>;
+      zip<U>(other: Collection<any, U>): Seq.Indexed<[T, U]>;
       zip<U, V>(
-        other: Collection<unknown, U>,
-        other2: Collection<unknown, V>
+        other: Collection<any, U>,
+        other2: Collection<any, V>
       ): Seq.Indexed<[T, U, V]>;
       zip(
-        ...collections: Array<Collection<unknown, unknown>>
-      ): Seq.Indexed<unknown>;
+        ...collections: Array<Collection<any, any>>
+      ): Seq.Indexed<any>;
 
       /**
        * Returns a Seq "zipped" with the provided collections.
@@ -2990,14 +2990,14 @@ declare namespace Immutable {
        * const c = a.zipAll(b); // Seq [ [ 1, 3 ], [ 2, 4 ], [ undefined, 5 ] ]
        * ```
        */
-      zipAll<U>(other: Collection<unknown, U>): Seq.Indexed<[T, U]>;
+      zipAll<U>(other: Collection<any, U>): Seq.Indexed<[T, U]>;
       zipAll<U, V>(
-        other: Collection<unknown, U>,
-        other2: Collection<unknown, V>
+        other: Collection<any, U>,
+        other2: Collection<any, V>
       ): Seq.Indexed<[T, U, V]>;
       zipAll(
-        ...collections: Array<Collection<unknown, unknown>>
-      ): Seq.Indexed<unknown>;
+        ...collections: Array<Collection<any, any>>
+      ): Seq.Indexed<any>;
 
       /**
        * Returns a Seq "zipped" with the provided collections by using a
@@ -3012,16 +3012,16 @@ declare namespace Immutable {
        */
       zipWith<U, Z>(
         zipper: (value: T, otherValue: U) => Z,
-        otherCollection: Collection<unknown, U>
+        otherCollection: Collection<any, U>
       ): Seq.Indexed<Z>;
       zipWith<U, V, Z>(
         zipper: (value: T, otherValue: U, thirdValue: V) => Z,
-        otherCollection: Collection<unknown, U>,
-        thirdCollection: Collection<unknown, V>
+        otherCollection: Collection<any, U>,
+        thirdCollection: Collection<any, V>
       ): Seq.Indexed<Z>;
       zipWith<Z>(
-        zipper: (...values: Array<unknown>) => Z,
-        ...collections: Array<Collection<unknown, unknown>>
+        zipper: (...values: Array<any>) => Z,
+        ...collections: Array<Collection<any, any>>
       ): Seq.Indexed<Z>;
 
       [Symbol.iterator](): IterableIterator<T>;
@@ -3052,7 +3052,7 @@ declare namespace Immutable {
       /**
        * Deeply converts this Set Seq to equivalent native JavaScript Array.
        */
-      toJS(): Array<unknown>;
+      toJS(): Array<any>;
 
       /**
        * Shallowly converts this Set Seq to equivalent native JavaScript Array.
@@ -3091,7 +3091,7 @@ declare namespace Immutable {
        */
       map<M>(
         mapper: (value: T, key: T, iter: this) => M,
-        context?: unknown
+        context?: any
       ): Seq.Set<M>;
 
       /**
@@ -3101,7 +3101,7 @@ declare namespace Immutable {
        */
       flatMap<M>(
         mapper: (value: T, key: T, iter: this) => Iterable<M>,
-        context?: unknown
+        context?: any
       ): Seq.Set<M>;
 
       /**
@@ -3113,11 +3113,11 @@ declare namespace Immutable {
        */
       filter<F extends T>(
         predicate: (value: T, key: T, iter: this) => value is F,
-        context?: unknown
+        context?: any
       ): Seq.Set<F>;
       filter(
-        predicate: (value: T, key: T, iter: this) => unknown,
-        context?: unknown
+        predicate: (value: T, key: T, iter: this) => any,
+        context?: any
       ): this;
 
       [Symbol.iterator](): IterableIterator<T>;
@@ -3143,14 +3143,14 @@ declare namespace Immutable {
    * Note: `Seq` is a conversion function and not a class, and does not use the
    * `new` keyword during construction.
    */
-  function Seq<S extends Seq<unknown, unknown>>(seq: S): S;
+  function Seq<S extends Seq<any, any>>(seq: S): S;
   function Seq<K, V>(collection: Collection.Keyed<K, V>): Seq.Keyed<K, V>;
   function Seq<T>(collection: Collection.Set<T>): Seq.Set<T>;
   function Seq<T>(
     collection: Collection.Indexed<T> | Iterable<T> | ArrayLike<T>
   ): Seq.Indexed<T>;
   function Seq<V>(obj: { [key: string]: V }): Seq.Keyed<string, V>;
-  function Seq<K = unknown, V = unknown>(): Seq<K, V>;
+  function Seq<K = any, V = any>(): Seq<K, V>;
 
   interface Seq<K, V> extends Collection<K, V> {
     /**
@@ -3206,7 +3206,7 @@ declare namespace Immutable {
      */
     map<M>(
       mapper: (value: V, key: K, iter: this) => M,
-      context?: unknown
+      context?: any
     ): Seq<K, M>;
 
     /**
@@ -3225,7 +3225,7 @@ declare namespace Immutable {
      */
     map<M>(
       mapper: (value: V, key: K, iter: this) => M,
-      context?: unknown
+      context?: any
     ): Seq<M, M>;
 
     /**
@@ -3235,7 +3235,7 @@ declare namespace Immutable {
      */
     flatMap<M>(
       mapper: (value: V, key: K, iter: this) => Iterable<M>,
-      context?: unknown
+      context?: any
     ): Seq<K, M>;
 
     /**
@@ -3246,7 +3246,7 @@ declare namespace Immutable {
      */
     flatMap<M>(
       mapper: (value: V, key: K, iter: this) => Iterable<M>,
-      context?: unknown
+      context?: any
     ): Seq<M, M>;
 
     /**
@@ -3258,11 +3258,11 @@ declare namespace Immutable {
      */
     filter<F extends V>(
       predicate: (value: V, key: K, iter: this) => value is F,
-      context?: unknown
+      context?: any
     ): Seq<K, F>;
     filter(
-      predicate: (value: V, key: K, iter: this) => unknown,
-      context?: unknown
+      predicate: (value: V, key: K, iter: this) => any,
+      context?: any
     ): this;
   }
 
@@ -3285,29 +3285,29 @@ declare namespace Immutable {
      * @deprecated use `const { isKeyed } = require('immutable')`
      */
     function isKeyed(
-      maybeKeyed: unknown
-    ): maybeKeyed is Collection.Keyed<unknown, unknown>;
+      maybeKeyed: any
+    ): maybeKeyed is Collection.Keyed<any, any>;
 
     /**
      * @deprecated use `const { isIndexed } = require('immutable')`
      */
     function isIndexed(
-      maybeIndexed: unknown
-    ): maybeIndexed is Collection.Indexed<unknown>;
+      maybeIndexed: any
+    ): maybeIndexed is Collection.Indexed<any>;
 
     /**
      * @deprecated use `const { isAssociative } = require('immutable')`
      */
     function isAssociative(
-      maybeAssociative: unknown
+      maybeAssociative: any
     ): maybeAssociative is
-      | Collection.Keyed<unknown, unknown>
-      | Collection.Indexed<unknown>;
+      | Collection.Keyed<any, any>
+      | Collection.Indexed<any>;
 
     /**
      * @deprecated use `const { isOrdered } = require('immutable')`
      */
-    function isOrdered(maybeOrdered: unknown): boolean;
+    function isOrdered(maybeOrdered: any): boolean;
 
     /**
      * Keyed Collections have discrete keys tied to each value.
@@ -3336,7 +3336,7 @@ declare namespace Immutable {
        *
        * Converts keys to Strings.
        */
-      toJS(): { [key: string]: unknown };
+      toJS(): { [key: string]: any };
 
       /**
        * Shallowly converts this Keyed collection to equivalent native JavaScript Object.
@@ -3396,7 +3396,7 @@ declare namespace Immutable {
        */
       map<M>(
         mapper: (value: V, key: K, iter: this) => M,
-        context?: unknown
+        context?: any
       ): Collection.Keyed<K, M>;
 
       /**
@@ -3415,7 +3415,7 @@ declare namespace Immutable {
        */
       mapKeys<M>(
         mapper: (key: K, value: V, iter: this) => M,
-        context?: unknown
+        context?: any
       ): Collection.Keyed<M, V>;
 
       /**
@@ -3441,7 +3441,7 @@ declare namespace Immutable {
           index: number,
           iter: this
         ) => [KM, VM] | undefined,
-        context?: unknown
+        context?: any
       ): Collection.Keyed<KM, VM>;
 
       /**
@@ -3451,7 +3451,7 @@ declare namespace Immutable {
        */
       flatMap<KM, VM>(
         mapper: (value: V, key: K, iter: this) => Iterable<[KM, VM]>,
-        context?: unknown
+        context?: any
       ): Collection.Keyed<KM, VM>;
 
       /**
@@ -3463,11 +3463,11 @@ declare namespace Immutable {
        */
       filter<F extends V>(
         predicate: (value: V, key: K, iter: this) => value is F,
-        context?: unknown
+        context?: any
       ): Collection.Keyed<K, F>;
       filter(
-        predicate: (value: V, key: K, iter: this) => unknown,
-        context?: unknown
+        predicate: (value: V, key: K, iter: this) => any,
+        context?: any
       ): this;
 
       [Symbol.iterator](): IterableIterator<[K, V]>;
@@ -3504,7 +3504,7 @@ declare namespace Immutable {
       /**
        * Deeply converts this Indexed collection to equivalent native JavaScript Array.
        */
-      toJS(): Array<unknown>;
+      toJS(): Array<any>;
 
       /**
        * Shallowly converts this Indexed collection to equivalent native JavaScript Array.
@@ -3540,7 +3540,7 @@ declare namespace Immutable {
        * If this is a collection of [key, value] entry tuples, it will return a
        * Seq.Keyed of those entries.
        */
-      fromEntrySeq(): Seq.Keyed<unknown, unknown>;
+      fromEntrySeq(): Seq.Keyed<any, any>;
 
       // Combination
 
@@ -3584,7 +3584,7 @@ declare namespace Immutable {
        *
        * Note: `interleave` *cannot* be used in `withMutations`.
        */
-      interleave(...collections: Array<Collection<unknown, T>>): this;
+      interleave(...collections: Array<Collection<any, T>>): this;
 
       /**
        * Splice returns a new indexed Collection by replacing a region of this
@@ -3624,14 +3624,14 @@ declare namespace Immutable {
        * const c = a.zip(b); // List [ [ 1, 4 ], [ 2, 5 ], [ 3, 6 ] ]
        * ```
        */
-      zip<U>(other: Collection<unknown, U>): Collection.Indexed<[T, U]>;
+      zip<U>(other: Collection<any, U>): Collection.Indexed<[T, U]>;
       zip<U, V>(
-        other: Collection<unknown, U>,
-        other2: Collection<unknown, V>
+        other: Collection<any, U>,
+        other2: Collection<any, V>
       ): Collection.Indexed<[T, U, V]>;
       zip(
-        ...collections: Array<Collection<unknown, unknown>>
-      ): Collection.Indexed<unknown>;
+        ...collections: Array<Collection<any, any>>
+      ): Collection.Indexed<any>;
 
       /**
        * Returns a Collection "zipped" with the provided collections.
@@ -3645,14 +3645,14 @@ declare namespace Immutable {
        * const c = a.zipAll(b); // List [ [ 1, 3 ], [ 2, 4 ], [ undefined, 5 ] ]
        * ```
        */
-      zipAll<U>(other: Collection<unknown, U>): Collection.Indexed<[T, U]>;
+      zipAll<U>(other: Collection<any, U>): Collection.Indexed<[T, U]>;
       zipAll<U, V>(
-        other: Collection<unknown, U>,
-        other2: Collection<unknown, V>
+        other: Collection<any, U>,
+        other2: Collection<any, V>
       ): Collection.Indexed<[T, U, V]>;
       zipAll(
-        ...collections: Array<Collection<unknown, unknown>>
-      ): Collection.Indexed<unknown>;
+        ...collections: Array<Collection<any, any>>
+      ): Collection.Indexed<any>;
 
       /**
        * Returns a Collection of the same type "zipped" with the provided
@@ -3670,16 +3670,16 @@ declare namespace Immutable {
        */
       zipWith<U, Z>(
         zipper: (value: T, otherValue: U) => Z,
-        otherCollection: Collection<unknown, U>
+        otherCollection: Collection<any, U>
       ): Collection.Indexed<Z>;
       zipWith<U, V, Z>(
         zipper: (value: T, otherValue: U, thirdValue: V) => Z,
-        otherCollection: Collection<unknown, U>,
-        thirdCollection: Collection<unknown, V>
+        otherCollection: Collection<any, U>,
+        thirdCollection: Collection<any, V>
       ): Collection.Indexed<Z>;
       zipWith<Z>(
-        zipper: (...values: Array<unknown>) => Z,
-        ...collections: Array<Collection<unknown, unknown>>
+        zipper: (...values: Array<any>) => Z,
+        ...collections: Array<Collection<any, any>>
       ): Collection.Indexed<Z>;
 
       // Search for value
@@ -3702,7 +3702,7 @@ declare namespace Immutable {
        */
       findIndex(
         predicate: (value: T, index: number, iter: this) => boolean,
-        context?: unknown
+        context?: any
       ): number;
 
       /**
@@ -3711,7 +3711,7 @@ declare namespace Immutable {
        */
       findLastIndex(
         predicate: (value: T, index: number, iter: this) => boolean,
-        context?: unknown
+        context?: any
       ): number;
 
       // Sequence algorithms
@@ -3738,7 +3738,7 @@ declare namespace Immutable {
        */
       map<M>(
         mapper: (value: T, key: number, iter: this) => M,
-        context?: unknown
+        context?: any
       ): Collection.Indexed<M>;
 
       /**
@@ -3748,7 +3748,7 @@ declare namespace Immutable {
        */
       flatMap<M>(
         mapper: (value: T, key: number, iter: this) => Iterable<M>,
-        context?: unknown
+        context?: any
       ): Collection.Indexed<M>;
 
       /**
@@ -3760,11 +3760,11 @@ declare namespace Immutable {
        */
       filter<F extends T>(
         predicate: (value: T, index: number, iter: this) => value is F,
-        context?: unknown
+        context?: any
       ): Collection.Indexed<F>;
       filter(
-        predicate: (value: T, index: number, iter: this) => unknown,
-        context?: unknown
+        predicate: (value: T, index: number, iter: this) => any,
+        context?: any
       ): this;
 
       [Symbol.iterator](): IterableIterator<T>;
@@ -3801,7 +3801,7 @@ declare namespace Immutable {
       /**
        * Deeply converts this Set collection to equivalent native JavaScript Array.
        */
-      toJS(): Array<unknown>;
+      toJS(): Array<any>;
 
       /**
        * Shallowly converts this Set collection to equivalent native JavaScript Array.
@@ -3840,7 +3840,7 @@ declare namespace Immutable {
        */
       map<M>(
         mapper: (value: T, key: T, iter: this) => M,
-        context?: unknown
+        context?: any
       ): Collection.Set<M>;
 
       /**
@@ -3850,7 +3850,7 @@ declare namespace Immutable {
        */
       flatMap<M>(
         mapper: (value: T, key: T, iter: this) => Iterable<M>,
-        context?: unknown
+        context?: any
       ): Collection.Set<M>;
 
       /**
@@ -3862,11 +3862,11 @@ declare namespace Immutable {
        */
       filter<F extends T>(
         predicate: (value: T, key: T, iter: this) => value is F,
-        context?: unknown
+        context?: any
       ): Collection.Set<F>;
       filter(
-        predicate: (value: T, key: T, iter: this) => unknown,
-        context?: unknown
+        predicate: (value: T, key: T, iter: this) => any,
+        context?: any
       ): this;
 
       [Symbol.iterator](): IterableIterator<T>;
@@ -3895,14 +3895,14 @@ declare namespace Immutable {
    * Note: `Collection` is a conversion function and not a class, and does not
    * use the `new` keyword during construction.
    */
-  function Collection<I extends Collection<unknown, unknown>>(collection: I): I;
+  function Collection<I extends Collection<any, any>>(collection: I): I;
   function Collection<T>(
     collection: Iterable<T> | ArrayLike<T>
   ): Collection.Indexed<T>;
   function Collection<V>(obj: {
     [key: string]: V;
   }): Collection.Keyed<string, V>;
-  function Collection<K = unknown, V = unknown>(): Collection<K, V>;
+  function Collection<K = any, V = any>(): Collection<K, V>;
 
   interface Collection<K, V> extends ValueObject {
     // Value equality
@@ -3914,7 +3914,7 @@ declare namespace Immutable {
      * Note: This is equivalent to `Immutable.is(this, other)`, but provided to
      * allow for chained expressions.
      */
-    equals(other: unknown): boolean;
+    equals(other: any): boolean;
 
     /**
      * Computes and returns the hashed identity for this Collection.
@@ -4008,13 +4008,13 @@ declare namespace Immutable {
      * deepData.getIn(['x', 0, 'y']) // 123
      * ```
      */
-    getIn(searchKeyPath: Iterable<unknown>, notSetValue?: unknown): unknown;
+    getIn(searchKeyPath: Iterable<any>, notSetValue?: any): any;
 
     /**
      * True if the result of following a path of keys or indices through nested
      * Collections results in a set value.
      */
-    hasIn(searchKeyPath: Iterable<unknown>): boolean;
+    hasIn(searchKeyPath: Iterable<any>): boolean;
 
     // Persistent changes
 
@@ -4049,7 +4049,7 @@ declare namespace Immutable {
      * `Collection.Indexed`, and `Collection.Set` become `Array`, while
      * `Collection.Keyed` become `Object`, converting keys to Strings.
      */
-    toJS(): Array<unknown> | { [key: string]: unknown };
+    toJS(): Array<any> | { [key: string]: any };
 
     /**
      * Shallowly converts this Collection to equivalent native JavaScript Array or Object.
@@ -4208,7 +4208,7 @@ declare namespace Immutable {
      */
     entries(): IterableIterator<[K, V]>;
 
-    [Symbol.iterator](): IterableIterator<unknown>;
+    [Symbol.iterator](): IterableIterator<any>;
 
     // Collections (Seq)
 
@@ -4246,7 +4246,7 @@ declare namespace Immutable {
      */
     map<M>(
       mapper: (value: V, key: K, iter: this) => M,
-      context?: unknown
+      context?: any
     ): Collection<K, M>;
 
     /**
@@ -4255,7 +4255,7 @@ declare namespace Immutable {
      *
      * @ignore
      */
-    map(...args: Array<never>): unknown;
+    map(...args: Array<never>): any;
 
     /**
      * Returns a new Collection of the same type with only the entries for which
@@ -4273,11 +4273,11 @@ declare namespace Immutable {
      */
     filter<F extends V>(
       predicate: (value: V, key: K, iter: this) => value is F,
-      context?: unknown
+      context?: any
     ): Collection<K, F>;
     filter(
-      predicate: (value: V, key: K, iter: this) => unknown,
-      context?: unknown
+      predicate: (value: V, key: K, iter: this) => any,
+      context?: any
     ): this;
 
     /**
@@ -4296,7 +4296,7 @@ declare namespace Immutable {
      */
     filterNot(
       predicate: (value: V, key: K, iter: this) => boolean,
-      context?: unknown
+      context?: any
     ): this;
 
     /**
@@ -4391,7 +4391,7 @@ declare namespace Immutable {
      */
     groupBy<G>(
       grouper: (value: V, key: K, iter: this) => G,
-      context?: unknown
+      context?: any
     ): /*Map*/ Seq.Keyed<G, /*this*/ Collection<K, V>>;
 
     // Side effects
@@ -4404,8 +4404,8 @@ declare namespace Immutable {
      * (including the last iteration which returned false).
      */
     forEach(
-      sideEffect: (value: V, key: K, iter: this) => unknown,
-      context?: unknown
+      sideEffect: (value: V, key: K, iter: this) => any,
+      context?: any
     ): number;
 
     // Creating subsets
@@ -4466,7 +4466,7 @@ declare namespace Immutable {
      */
     skipWhile(
       predicate: (value: V, key: K, iter: this) => boolean,
-      context?: unknown
+      context?: any
     ): this;
 
     /**
@@ -4483,7 +4483,7 @@ declare namespace Immutable {
      */
     skipUntil(
       predicate: (value: V, key: K, iter: this) => boolean,
-      context?: unknown
+      context?: any
     ): this;
 
     /**
@@ -4512,7 +4512,7 @@ declare namespace Immutable {
      */
     takeWhile(
       predicate: (value: V, key: K, iter: this) => boolean,
-      context?: unknown
+      context?: any
     ): this;
 
     /**
@@ -4529,7 +4529,7 @@ declare namespace Immutable {
      */
     takeUntil(
       predicate: (value: V, key: K, iter: this) => boolean,
-      context?: unknown
+      context?: any
     ): this;
 
     // Combination
@@ -4542,8 +4542,8 @@ declare namespace Immutable {
      * have the same key.
      */
     concat(
-      ...valuesOrCollections: Array<unknown>
-    ): Collection<unknown, unknown>;
+      ...valuesOrCollections: Array<any>
+    ): Collection<any, any>;
 
     /**
      * Flattens nested Collections.
@@ -4555,12 +4555,12 @@ declare namespace Immutable {
      *
      * Flattens only others Collection, not Arrays or Objects.
      *
-     * Note: `flatten(true)` operates on Collection<unknown, Collection<K, V>> and
+     * Note: `flatten(true)` operates on Collection<any, Collection<K, V>> and
      * returns Collection<K, V>
      */
-    flatten(depth?: number): Collection<unknown, unknown>;
+    flatten(depth?: number): Collection<any, any>;
     // tslint:disable-next-line unified-signatures
-    flatten(shallow?: boolean): Collection<unknown, unknown>;
+    flatten(shallow?: boolean): Collection<any, any>;
 
     /**
      * Flat-maps the Collection, returning a Collection of the same type.
@@ -4569,7 +4569,7 @@ declare namespace Immutable {
      */
     flatMap<M>(
       mapper: (value: V, key: K, iter: this) => Iterable<M>,
-      context?: unknown
+      context?: any
     ): Collection<K, M>;
 
     /**
@@ -4580,7 +4580,7 @@ declare namespace Immutable {
      */
     flatMap<KM, VM>(
       mapper: (value: V, key: K, iter: this) => Iterable<[KM, VM]>,
-      context?: unknown
+      context?: any
     ): Collection<KM, VM>;
 
     // Reducing a value
@@ -4597,7 +4597,7 @@ declare namespace Immutable {
     reduce<R>(
       reducer: (reduction: R, value: V, key: K, iter: this) => R,
       initialReduction: R,
-      context?: unknown
+      context?: any
     ): R;
     reduce<R>(
       reducer: (reduction: V | R, value: V, key: K, iter: this) => R
@@ -4612,7 +4612,7 @@ declare namespace Immutable {
     reduceRight<R>(
       reducer: (reduction: R, value: V, key: K, iter: this) => R,
       initialReduction: R,
-      context?: unknown
+      context?: any
     ): R;
     reduceRight<R>(
       reducer: (reduction: V | R, value: V, key: K, iter: this) => R
@@ -4623,7 +4623,7 @@ declare namespace Immutable {
      */
     every(
       predicate: (value: V, key: K, iter: this) => boolean,
-      context?: unknown
+      context?: any
     ): boolean;
 
     /**
@@ -4631,7 +4631,7 @@ declare namespace Immutable {
      */
     some(
       predicate: (value: V, key: K, iter: this) => boolean,
-      context?: unknown
+      context?: any
     ): boolean;
 
     /**
@@ -4661,7 +4661,7 @@ declare namespace Immutable {
     count(): number;
     count(
       predicate: (value: V, key: K, iter: this) => boolean,
-      context?: unknown
+      context?: any
     ): number;
 
     /**
@@ -4672,7 +4672,7 @@ declare namespace Immutable {
      */
     countBy<G>(
       grouper: (value: V, key: K, iter: this) => G,
-      context?: unknown
+      context?: any
     ): Map<G, number>;
 
     // Search for value
@@ -4682,7 +4682,7 @@ declare namespace Immutable {
      */
     find(
       predicate: (value: V, key: K, iter: this) => boolean,
-      context?: unknown,
+      context?: any,
       notSetValue?: V
     ): V | undefined;
 
@@ -4693,7 +4693,7 @@ declare namespace Immutable {
      */
     findLast(
       predicate: (value: V, key: K, iter: this) => boolean,
-      context?: unknown,
+      context?: any,
       notSetValue?: V
     ): V | undefined;
 
@@ -4702,7 +4702,7 @@ declare namespace Immutable {
      */
     findEntry(
       predicate: (value: V, key: K, iter: this) => boolean,
-      context?: unknown,
+      context?: any,
       notSetValue?: V
     ): [K, V] | undefined;
 
@@ -4714,7 +4714,7 @@ declare namespace Immutable {
      */
     findLastEntry(
       predicate: (value: V, key: K, iter: this) => boolean,
-      context?: unknown,
+      context?: any,
       notSetValue?: V
     ): [K, V] | undefined;
 
@@ -4723,7 +4723,7 @@ declare namespace Immutable {
      */
     findKey(
       predicate: (value: V, key: K, iter: this) => boolean,
-      context?: unknown
+      context?: any
     ): K | undefined;
 
     /**
@@ -4733,7 +4733,7 @@ declare namespace Immutable {
      */
     findLastKey(
       predicate: (value: V, key: K, iter: this) => boolean,
-      context?: unknown
+      context?: any
     ): K | undefined;
 
     /**
@@ -4844,7 +4844,7 @@ declare namespace Immutable {
      * Note: This is equivalent to `Immutable.is(this, other)`, but provided to
      * allow for chained expressions.
      */
-    equals(other: unknown): boolean;
+    equals(other: any): boolean;
 
     /**
      * Computes and returns the hashed identity for this Collection.
@@ -4951,13 +4951,13 @@ declare namespace Immutable {
    *      "The iterable protocol"
    */
   function fromJS(
-    jsValue: unknown,
+    jsValue: any,
     reviver?: (
       key: string | number,
-      sequence: Collection.Keyed<string, unknown> | Collection.Indexed<unknown>,
+      sequence: Collection.Keyed<string, any> | Collection.Indexed<any>,
       path?: Array<string | number>
-    ) => unknown
-  ): Collection<unknown, unknown>;
+    ) => any
+  ): Collection<any, any>;
 
   /**
    * Value equality check with semantics similar to `Object.is`, but treats
@@ -4984,7 +4984,7 @@ declare namespace Immutable {
    * Note: Unlike `Object.is`, `Immutable.is` assumes `0` and `-0` are the same
    * value, matching the behavior of ES6 Map key equality.
    */
-  function is(first: unknown, second: unknown): boolean;
+  function is(first: any, second: any): boolean;
 
   /**
    * The `hash()` function is an important part of how Immutable determines if
@@ -5008,7 +5008,7 @@ declare namespace Immutable {
    *
    * *New in Version 4.0*
    */
-  function hash(value: unknown): number;
+  function hash(value: any): number;
 
   /**
    * True if `maybeImmutable` is an Immutable Collection or Record.
@@ -5027,8 +5027,8 @@ declare namespace Immutable {
    * ```
    */
   function isImmutable(
-    maybeImmutable: unknown
-  ): maybeImmutable is Collection<unknown, unknown>;
+    maybeImmutable: any
+  ): maybeImmutable is Collection<any, any>;
 
   /**
    * True if `maybeCollection` is a Collection, or any of its subclasses.
@@ -5044,8 +5044,8 @@ declare namespace Immutable {
    * ```
    */
   function isCollection(
-    maybeCollection: unknown
-  ): maybeCollection is Collection<unknown, unknown>;
+    maybeCollection: any
+  ): maybeCollection is Collection<any, any>;
 
   /**
    * True if `maybeKeyed` is a Collection.Keyed, or any of its subclasses.
@@ -5061,8 +5061,8 @@ declare namespace Immutable {
    * ```
    */
   function isKeyed(
-    maybeKeyed: unknown
-  ): maybeKeyed is Collection.Keyed<unknown, unknown>;
+    maybeKeyed: any
+  ): maybeKeyed is Collection.Keyed<any, any>;
 
   /**
    * True if `maybeIndexed` is a Collection.Indexed, or any of its subclasses.
@@ -5079,8 +5079,8 @@ declare namespace Immutable {
    * ```
    */
   function isIndexed(
-    maybeIndexed: unknown
-  ): maybeIndexed is Collection.Indexed<unknown>;
+    maybeIndexed: any
+  ): maybeIndexed is Collection.Indexed<any>;
 
   /**
    * True if `maybeAssociative` is either a Keyed or Indexed Collection.
@@ -5097,10 +5097,10 @@ declare namespace Immutable {
    * ```
    */
   function isAssociative(
-    maybeAssociative: unknown
+    maybeAssociative: any
   ): maybeAssociative is
-    | Collection.Keyed<unknown, unknown>
-    | Collection.Indexed<unknown>;
+    | Collection.Keyed<any, any>
+    | Collection.Indexed<any>;
 
   /**
    * True if `maybeOrdered` is a Collection where iteration order is well
@@ -5117,7 +5117,7 @@ declare namespace Immutable {
    * isOrdered(Set()); // false
    * ```
    */
-  function isOrdered(maybeOrdered: unknown): boolean;
+  function isOrdered(maybeOrdered: any): boolean;
 
   /**
    * True if `maybeValue` is a JavaScript Object which has *both* `equals()`
@@ -5126,60 +5126,60 @@ declare namespace Immutable {
    * Any two instances of *value objects* can be compared for value equality with
    * `Immutable.is()` and can be used as keys in a `Map` or members in a `Set`.
    */
-  function isValueObject(maybeValue: unknown): maybeValue is ValueObject;
+  function isValueObject(maybeValue: any): maybeValue is ValueObject;
 
   /**
    * True if `maybeSeq` is a Seq.
    */
   function isSeq(
-    maybeSeq: unknown
+    maybeSeq: any
   ): maybeSeq is
-    | Seq.Indexed<unknown>
-    | Seq.Keyed<unknown, unknown>
-    | Seq.Set<unknown>;
+    | Seq.Indexed<any>
+    | Seq.Keyed<any, any>
+    | Seq.Set<any>;
 
   /**
    * True if `maybeList` is a List.
    */
-  function isList(maybeList: unknown): maybeList is List<unknown>;
+  function isList(maybeList: any): maybeList is List<any>;
 
   /**
    * True if `maybeMap` is a Map.
    *
    * Also true for OrderedMaps.
    */
-  function isMap(maybeMap: unknown): maybeMap is Map<unknown, unknown>;
+  function isMap(maybeMap: any): maybeMap is Map<any, any>;
 
   /**
    * True if `maybeOrderedMap` is an OrderedMap.
    */
   function isOrderedMap(
-    maybeOrderedMap: unknown
-  ): maybeOrderedMap is OrderedMap<unknown, unknown>;
+    maybeOrderedMap: any
+  ): maybeOrderedMap is OrderedMap<any, any>;
 
   /**
    * True if `maybeStack` is a Stack.
    */
-  function isStack(maybeStack: unknown): maybeStack is Stack<unknown>;
+  function isStack(maybeStack: any): maybeStack is Stack<any>;
 
   /**
    * True if `maybeSet` is a Set.
    *
    * Also true for OrderedSets.
    */
-  function isSet(maybeSet: unknown): maybeSet is Set<unknown>;
+  function isSet(maybeSet: any): maybeSet is Set<any>;
 
   /**
    * True if `maybeOrderedSet` is an OrderedSet.
    */
   function isOrderedSet(
-    maybeOrderedSet: unknown
-  ): maybeOrderedSet is OrderedSet<unknown>;
+    maybeOrderedSet: any
+  ): maybeOrderedSet is OrderedSet<any>;
 
   /**
    * True if `maybeRecord` is a Record.
    */
-  function isRecord(maybeRecord: unknown): maybeRecord is Record<{}>;
+  function isRecord(maybeRecord: any): maybeRecord is Record<{}>;
 
   /**
    * Returns the value within the provided collection associated with the
@@ -5205,7 +5205,7 @@ declare namespace Immutable {
   function get<TProps extends object, K extends keyof TProps>(
     record: Record<TProps>,
     key: K,
-    notSetValue: unknown
+    notSetValue: any
   ): TProps[K];
   function get<V>(collection: Array<V>, key: number): V | undefined;
   function get<V, NSV>(
@@ -5216,7 +5216,7 @@ declare namespace Immutable {
   function get<C extends object, K extends keyof C>(
     object: C,
     key: K,
-    notSetValue: unknown
+    notSetValue: any
   ): C[K];
   function get<V>(collection: { [key: string]: V }, key: string): V | undefined;
   function get<V, NSV>(
@@ -5241,7 +5241,7 @@ declare namespace Immutable {
    * has({ x: 123, y: 456 }, 'z') // false
    * ```
    */
-  function has(collection: object, key: unknown): boolean;
+  function has(collection: object, key: any): boolean;
 
   /**
    * Returns a copy of the collection with the value at key removed.
@@ -5261,7 +5261,7 @@ declare namespace Immutable {
    * console.log(originalObject) // { x: 123, y: 456 }
    * ```
    */
-  function remove<K, C extends Collection<K, unknown>>(
+  function remove<K, C extends Collection<K, any>>(
     collection: C,
     key: K
   ): C;
@@ -5270,9 +5270,9 @@ declare namespace Immutable {
     C extends Record<TProps>,
     K extends keyof TProps
   >(collection: C, key: K): C;
-  function remove<C extends Array<unknown>>(collection: C, key: number): C;
+  function remove<C extends Array<any>>(collection: C, key: number): C;
   function remove<C, K extends keyof C>(collection: C, key: K): C;
-  function remove<C extends { [key: string]: unknown }, K extends keyof C>(
+  function remove<C extends { [key: string]: any }, K extends keyof C>(
     collection: C,
     key: K
   ): C;
@@ -5409,10 +5409,10 @@ declare namespace Immutable {
    * ```
    */
   function getIn(
-    collection: unknown,
-    keyPath: Iterable<unknown>,
-    notSetValue?: unknown
-  ): unknown;
+    collection: any,
+    keyPath: Iterable<any>,
+    notSetValue?: any
+  ): any;
 
   /**
    * Returns true if the key path is defined in the provided collection.
@@ -5427,7 +5427,7 @@ declare namespace Immutable {
    * hasIn({ x: { y: { z: 123 }}}, ['x', 'q', 'p']) // false
    * ```
    */
-  function hasIn(collection: unknown, keyPath: Iterable<unknown>): boolean;
+  function hasIn(collection: any, keyPath: Iterable<any>): boolean;
 
   /**
    * Returns a copy of the collection with the value at the key path removed.
@@ -5443,7 +5443,7 @@ declare namespace Immutable {
    * console.log(original) // { x: { y: { z: 123 }}}
    * ```
    */
-  function removeIn<C>(collection: C, keyPath: Iterable<unknown>): C;
+  function removeIn<C>(collection: C, keyPath: Iterable<any>): C;
 
   /**
    * Returns a copy of the collection with the value at the key path set to the
@@ -5462,8 +5462,8 @@ declare namespace Immutable {
    */
   function setIn<C>(
     collection: C,
-    keyPath: Iterable<unknown>,
-    value: unknown
+    keyPath: Iterable<any>,
+    value: any
   ): C;
 
   /**
@@ -5483,14 +5483,14 @@ declare namespace Immutable {
    */
   function updateIn<C>(
     collection: C,
-    keyPath: Iterable<unknown>,
-    updater: (value: unknown) => unknown
+    keyPath: Iterable<any>,
+    updater: (value: any) => any
   ): C;
   function updateIn<C>(
     collection: C,
-    keyPath: Iterable<unknown>,
-    notSetValue: unknown,
-    updater: (value: unknown) => unknown
+    keyPath: Iterable<any>,
+    notSetValue: any,
+    updater: (value: any) => any
   ): C;
 
   /**
@@ -5510,9 +5510,9 @@ declare namespace Immutable {
   function merge<C>(
     collection: C,
     ...collections: Array<
-      | Iterable<unknown>
-      | Iterable<[unknown, unknown]>
-      | { [key: string]: unknown }
+      | Iterable<any>
+      | Iterable<[any, any]>
+      | { [key: string]: any }
     >
   ): C;
 
@@ -5536,12 +5536,12 @@ declare namespace Immutable {
    * ```
    */
   function mergeWith<C>(
-    merger: (oldVal: unknown, newVal: unknown, key: unknown) => unknown,
+    merger: (oldVal: any, newVal: any, key: any) => any,
     collection: C,
     ...collections: Array<
-      | Iterable<unknown>
-      | Iterable<[unknown, unknown]>
-      | { [key: string]: unknown }
+      | Iterable<any>
+      | Iterable<[any, any]>
+      | { [key: string]: any }
     >
   ): C;
 
@@ -5573,9 +5573,9 @@ declare namespace Immutable {
   function mergeDeep<C>(
     collection: C,
     ...collections: Array<
-      | Iterable<unknown>
-      | Iterable<[unknown, unknown]>
-      | { [key: string]: unknown }
+      | Iterable<any>
+      | Iterable<[any, any]>
+      | { [key: string]: any }
     >
   ): C;
 
@@ -5601,12 +5601,12 @@ declare namespace Immutable {
    * ```
    */
   function mergeDeepWith<C>(
-    merger: (oldVal: unknown, newVal: unknown, key: unknown) => unknown,
+    merger: (oldVal: any, newVal: any, key: any) => any,
     collection: C,
     ...collections: Array<
-      | Iterable<unknown>
-      | Iterable<[unknown, unknown]>
-      | { [key: string]: unknown }
+      | Iterable<any>
+      | Iterable<[any, any]>
+      | { [key: string]: any }
     >
   ): C;
 }
